@@ -87,7 +87,6 @@ if not os.path.isdir(OUT_DIR):
     os.mkdir(OUT_DIR)
     
 
-
 class Manager(ScreenManager):
 
     screen_one = ObjectProperty(None)
