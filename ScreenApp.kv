@@ -1,0 +1,131 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<Button>:
+    font_size: 30
+	color: 1,0,0,0.3
+	size_hint: 0.26, 0.26
+	background_color: 0.18, .5, .92, 1
+	size_hint_y: None
+	height: 60
+
+<Label>:
+	font_size: 30
+	color:1,0,0,1
+	size_hint: 0.2, 0.2
+
+<GridLayout>:
+	padding: 10
+	spacing: 10
+
+<BoxLayout>:
+	spacing: 5
+	padding: 5
+
+<UploadScreen>:
+
+	BoxLayout:
+		orientation: 'vertical'
+
+		AnchorLayout:
+			size_hint_y: None
+			height: 140
+
+			Label:
+				text: 'AER'
+				font_size: 50
+
+		BoxLayout:
+			orientation: 'horizontal'
+
+			GridLayout:
+				rows: 2
+				cols: 2
+
+				Button:
+					size_hint_y: None
+					height: 30
+					font_size: 20
+					text: 'Select'
+					on_press: root.upload()
+
+				TextInput:
+					id: upload_space
+					cursor_blink: False
+					cursor_color: 255, 255, 255, 1
+					readonly: True
+					size_hint_y: None
+					multiline: False
+					hint_text: "Select a file to upload"
+					height: 30
+
+				Button:
+					size_hint_y: None
+					height: 60
+					text: 'Reset'
+					font_size: 30
+					on_press: root.clear_upload()
+
+				Button:
+					size_hint_y: None
+					height: 60
+					font_size: 30
+					text: 'Evaluate'
+					on_press: root.upload_process()
+
+
+<ResultScreen>:
+	video_file: video_file
+
+	BoxLayout:
+		orientation: 'vertical'
+
+		AnchorLayout:
+			size_hint_y: None
+			height: 140
+
+			Label:
+				text: 'AER'
+				font_size: 50
+
+		BoxLayout:
+			orientation: 'horizontal'
+
+			AnchorLayout:
+				size_hint_x: 0.3
+
+				# BoxLayout:
+				# 	orientation: 'vertical'
+
+				Button:
+					text: 'Reset'
+					size_hint_x: 0.9
+					height: 60
+					font_size: 30
+					on_press: root.manager.current = 'Screen1'
+
+			BoxLayout:
+				orientation: 'vertical'
+				spacing: 20
+
+				VideoPlayer:
+					id: video_file
+
+
+
+
+<Manager>:
+	id: screen_manager
+	transition: FadeTransition()
+	
+	screen_one: screen_one
+	screen_two: screen_two
+
+	UploadScreen:
+		id: screen_one
+		name: 'Screen1'
+		manager: screen_manager
+
+	ResultScreen:
+		id: screen_two
+		name: 'Screen2'
+		manager: screen_manager
